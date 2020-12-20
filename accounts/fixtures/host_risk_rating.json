@@ -1,0 +1,137 @@
+[
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 1,
+    "fields": {
+      "os_name": "Windows Server 2008 R2 Enterprise 64 bit Edition",
+      "risk_lvl": "Critical",
+      "nr_incidents": 1000
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 2,
+    "fields": {
+      "os_name": "Windows Server 2008 R2 Enterprise 64 bit Edition",
+      "risk_lvl": "High",
+      "nr_incidents": 900
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 3,
+    "fields": {
+      "os_name": "Windows Server 2008 R2 Enterprise 64 bit Edition",
+      "risk_lvl": "Medium",
+      "nr_incidents": 650
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 4,
+    "fields": {
+      "os_name": "Windows Server 2008 R2 Enterprise 64 bit Edition",
+      "risk_lvl": "Low",
+      "nr_incidents": 300
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 5,
+    "fields": {
+      "os_name": "Windows 7 Service Pack 1",
+      "risk_lvl": "Critical",
+      "nr_incidents": 1750
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 6,
+    "fields": {
+      "os_name": "Windows 7 Service Pack 1",
+      "risk_lvl": "High",
+      "nr_incidents": 1250
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 7,
+    "fields": {
+      "os_name": "Windows 7 Service Pack 1",
+      "risk_lvl": "Medium",
+      "nr_incidents": 20
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 8,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 6.6",
+      "risk_lvl": "Critical",
+      "nr_incidents": 270
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 9,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 6.6",
+      "risk_lvl": "High",
+      "nr_incidents": 240
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 10,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 6.6",
+      "risk_lvl": "Medium",
+      "nr_incidents": 190
+    }
+  },
+   {
+    "model": "accounts.hostriskrating",
+    "pk": 11,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 6.6",
+      "risk_lvl": "Low",
+      "nr_incidents": 50
+    }
+  },
+   {
+    "model": "accounts.hostriskrating",
+    "pk": 12,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 5.10",
+      "risk_lvl": "Critical",
+      "nr_incidents": 370
+    }
+  },
+   {
+    "model": "accounts.hostriskrating",
+    "pk": 13,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 5.10",
+      "risk_lvl": "High",
+      "nr_incidents": 330
+    }
+  },
+  {
+    "model": "accounts.hostriskrating",
+    "pk": 14,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 5.10",
+      "risk_lvl": "Medium",
+      "nr_incidents": 300
+    }
+  },
+   {
+    "model": "accounts.hostriskrating",
+    "pk": 15,
+    "fields": {
+      "os_name": "Oracle Enterprise Linux 5.10",
+      "risk_lvl": "Low",
+      "nr_incidents": 270
+    }
+  }
+]
