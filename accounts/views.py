@@ -21,6 +21,7 @@ def RiskRatingChart(request):
     risk_incidents = [{k['risk_lvl']: k['nr_incidents']} for k in dataset]
     series_data = [{k: [d.get(k) for d in risk_incidents if d.get(k) is not None]} for k in
                    set().union(*risk_incidents)]
+    series_data = [{'name': r, 'data': n} for d in series_data for r, n in d.items()]
 
     chart = {
         'chart': {'type': 'bar'},
@@ -41,6 +42,6 @@ def RiskRatingChart(request):
     }
 
     dump = json.dumps(chart)
-    print(chart)
+    print(series_data)
 
     return render(request, 'home.html', {'chart': dump})
