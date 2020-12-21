@@ -7,8 +7,10 @@
   <h1>
     <span class="label label-primary">Hello</span>
     <span class="label label-success">{{ user.username }}!</span>
-    <span class="label label-primary">Here are today's results from our VM scans</span>
   </h1>
+  <h2>
+    <p >Here are today's results from our VM scans</p>
+  </h2>
 </div>
 <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Log Out</a>
 <a class="btn btn-primary" href="{% url 'password_reset' %}" role="button">Reset Password</a>
