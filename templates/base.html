@@ -1,14 +1,45 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Django Project{% endblock %}</title>
+  <title>Django Project</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
+
 <body>
-  <main>
+  <main class='container'>
+    <style>
+      input,
+      li {
+        max-width: 50%;
+      }
+
+      .errorlist .list-group-item {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+      }
+    </style>
+    <!-- Apply bootstrap on Django generated elements -->
+    <script>
+      setTimeout(() => {
+        // Get elements
+        const labels = [...document.querySelectorAll('label')];
+        const inputs = [...document.querySelectorAll('input')];
+        const uls = [...document.querySelectorAll('ul')];
+        const lis = [...document.querySelectorAll('li')];
+        // Set class styles
+        labels.map(label => label.classList.add('control-label'));
+        inputs.map(input => input.classList.add('form-control'));
+        uls.map(ul => ul.classList.add('list-group'));
+        lis.map(li => li.classList.add('list-group-item'));
+      }, 0);
+    </script>
     {% block content %}
     {% endblock %}
   </main>
 </body>
+
 </html>

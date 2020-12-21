@@ -1,23 +1,26 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
-
 {% block content %}
 {% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-  <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
-  <div id="container"></div>
-  <script src="https://code.highcharts.com/highcharts.src.js"></script>
-  <script>
-    Highcharts.chart('container', {{ chart|safe }});
-  </script>
+<div class="page-header">
+  <h1>
+    <span class="label label-primary">Hi</span>
+    <span class="label label-success">{{ user.username }}!</span>
+  </h1>
+</div>
+<a class="btn btn-primary" href="{% url 'logout' %}" role="button">Log Out</a>
+<a class="btn btn-primary" href="{% url 'password_reset' %}" role="button">Reset Password</a>
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('container', {{ chart | safe }});
+</script>
 {% else %}
+<div class="page-header">
+  <h1>Home</h1>
+</div>
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+  <a class="btn btn-primary" href="{% url 'login' %}" role="button">Log in</a>
 {% endif %}
-
-
-
 {% endblock %}

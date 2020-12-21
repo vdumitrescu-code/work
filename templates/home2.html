@@ -1,9 +1,10 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
-
 {% block content %}
+<div class="page-header">
+  <h1>Home</h1>
+</div>
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+  <a class="btn btn-primary" href="{% url 'login' %}" role="button">Log in</a>
 {% endblock %}
