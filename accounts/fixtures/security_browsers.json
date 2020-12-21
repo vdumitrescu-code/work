@@ -1,0 +1,50 @@
+[
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 1,
+    "fields": {
+      "browser_name": "Edge",
+      "market_trust": 30.78
+    }
+  },
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 2,
+    "fields": {
+      "browser_name": "Opera",
+      "market_trust": 40.99
+    }
+  },
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 3,
+    "fields": {
+      "browser_name": "Tor",
+      "market_trust": 65.56
+    }
+  },
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 4,
+    "fields": {
+      "browser_name": "Chrome",
+      "market_trust": 48.3
+    }
+  },
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 5,
+    "fields": {
+      "browser_name": "Firefox",
+      "market_trust": 58.9
+    }
+  },
+  {
+    "model": "accounts.securitybrowsers",
+    "pk": 6,
+    "fields": {
+      "browser_name": "Safari",
+      "market_trust": 43.79
+    }
+  }
+]

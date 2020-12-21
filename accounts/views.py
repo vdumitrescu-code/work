@@ -1,4 +1,5 @@
 import json
+from operator import itemgetter
 
 from django.db.models import Sum
 from django.shortcuts import render
@@ -6,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import HostRiskRating, SecurityRiskOrigin
+from .models import HostRiskRating, SecurityRiskOrigin, SecurityBrowsers
 
 
 class SignUpView(generic.CreateView):
@@ -95,8 +96,64 @@ def risk_origin_chart(request):
     return dump
 
 
+def browser_security_chart(request):
+    dataset = SecurityBrowsers.objects.values().all()
+
+    browser_dict = [{k['browser_name']: k['market_trust']} for k in dataset]
+    browser_list = [[ln, lnr] for d in browser_dict for ln, lnr in d.items()]
+    sorted_list = sorted(browser_list, key=itemgetter(1), reverse=True)
+
+    chart = {
+        'chart': {
+            'plotBackgroundColor': None,
+            'plotBorderWidth': 0,
+            'plotShadow': False
+        },
+        'title': {
+            'text': 'Most<br>secure<br>browsers',
+            'align': 'center',
+            'verticalAlign': 'middle',
+            'y': 60
+        },
+        'tooltip': {
+            'pointFormat': '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        'accessibility': {
+            'point': {
+                'valueSuffix': '%'
+            }
+        },
+        'plotOptions': {
+            'pie': {
+                'dataLabels': {
+                    'enabled': True,
+                    'distance': -50,
+                    'style': {
+                        'fontWeight': 'bold',
+                        'color': 'white'
+                    }
+                },
+                'startAngle': -90,
+                'endAngle': 90,
+                'center': ['50%', '75%'],
+                'size': '110%'
+            }
+        },
+        'series': [{
+            'type': 'pie',
+            'name': 'Market trust',
+            'innerSize': '50%',
+            'data': sorted_list
+        }]
+    }
+    dump = json.dumps(chart)
+    return dump
+
+
 def vm_charts(request):
     chart_risk = risk_rating_chart(request)
     chart_origin = risk_origin_chart(request)
+    chart_secure = browser_security_chart(request)
 
-    return render(request, 'home.html', {'chart_risk': chart_risk, 'chart_origin': chart_origin})
+    return render(request, 'home.html',
+                  {'chart_risk': chart_risk, 'chart_origin': chart_origin, 'chart_secure': chart_secure})

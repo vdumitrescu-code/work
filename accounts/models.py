@@ -11,3 +11,8 @@ class HostRiskRating(models.Model):
 class SecurityRiskOrigin(models.Model):
     risk_name = models.TextField()
     nr_incidents = models.IntegerField()
+
+
+class SecurityBrowsers(models.Model):
+    browser_name = models.TextField()
+    market_trust = models.FloatField()

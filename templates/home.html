@@ -13,10 +13,12 @@
 <a class="btn btn-primary" href="{% url 'password_reset' %}" role="button">Reset Password</a>
 <div id="container"></div>
 <div id="container2"></div>
+<div id="container3"></div>
 <script src="https://code.highcharts.com/highcharts.src.js"></script>
 <script>
   Highcharts.chart('container', {{ chart_risk | safe }});
   Highcharts.chart('container2', {{ chart_origin | safe }});
+  Highcharts.chart('container3', {{ chart_secure | safe }});
 </script>
 {% else %}
 <div class="page-header">
