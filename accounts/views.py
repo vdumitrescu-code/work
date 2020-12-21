@@ -1,11 +1,12 @@
 import json
-from django.db.models import Count, Q
+
+from django.db.models import Sum
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .models import HostRiskRating
+from .models import HostRiskRating, SecurityRiskOrigin
 
 
 class SignUpView(generic.CreateView):
@@ -14,7 +15,7 @@ class SignUpView(generic.CreateView):
     template_name = 'registration/signup.html'
 
 
-def RiskRatingChart(request):
+def risk_rating_chart(request):
     dataset = HostRiskRating.objects.values().all()
 
     os_categories = list(set([k['os_name'] for k in dataset]))
@@ -42,6 +43,60 @@ def RiskRatingChart(request):
     }
 
     dump = json.dumps(chart)
-    print(series_data)
 
-    return render(request, 'home.html', {'chart': dump})
+    return dump
+
+
+def risk_origin_chart(request):
+    total_incidents = SecurityRiskOrigin.objects.aggregate(total_incidents=Sum('nr_incidents'))
+    dataset = SecurityRiskOrigin.objects.values().all()
+
+    risk_origin = [{k['risk_name']: k['nr_incidents']} for k in dataset]
+    series_data = [{'name': rn, 'y': round((n / total_incidents['total_incidents']) * 100, 2)} for d in risk_origin
+                   for rn, n in d.items()]
+
+    chart = {
+        'chart': {
+            'plotBackgroundColor': None,
+            'plotBorderWidth': None,
+            'plotShadow': False,
+            'type': 'pie'
+        },
+        'title': {
+            'text': 'Security Risk Origin'
+        },
+        'tooltip': {
+            'pointFormat': '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        'accessibility': {
+            'point': {
+                'valueSuffix': '%'
+            }
+        },
+        'plotOptions': {
+            'pie': {
+                'allowPointSelect': True,
+                'cursor': 'pointer',
+                'dataLabels': {
+                    'enabled': True,
+                    'format': '<b>{point.name}</b>: {point.percentage:.1f} %'
+                }
+            }
+        },
+        'series': [{
+            'name': 'Category',
+            'colorByPoint': True,
+            'data': series_data
+        }]
+    }
+
+    dump = json.dumps(chart)
+
+    return dump
+
+
+def vm_charts(request):
+    chart_risk = risk_rating_chart(request)
+    chart_origin = risk_origin_chart(request)
+
+    return render(request, 'home.html', {'chart_risk': chart_risk, 'chart_origin': chart_origin})

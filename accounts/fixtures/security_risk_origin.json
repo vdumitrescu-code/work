@@ -1,0 +1,42 @@
+[
+  {
+    "model": "accounts.securityriskorigin",
+    "pk": 1,
+    "fields": {
+      "risk_name": "Lack of Application Hardening",
+      "nr_incidents": 246
+    }
+  },
+  {
+    "model": "accounts.securityriskorigin",
+    "pk": 2,
+    "fields": {
+      "risk_name": "Missing Patch",
+      "nr_incidents": 78
+    }
+  },
+  {
+    "model": "accounts.securityriskorigin",
+    "pk": 3,
+    "fields": {
+      "risk_name": "Easily guessable credentials",
+      "nr_incidents": 103
+    }
+  },
+  {
+    "model": "accounts.securityriskorigin",
+    "pk": 4,
+    "fields": {
+      "risk_name": "Lack of OS Hardening",
+      "nr_incidents": 171
+    }
+  },
+  {
+    "model": "accounts.securityriskorigin",
+    "pk": 5,
+    "fields": {
+      "risk_name": "Network Design Flaw",
+      "nr_incidents": 20
+    }
+  }
+]

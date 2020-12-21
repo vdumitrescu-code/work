@@ -6,3 +6,8 @@ class HostRiskRating(models.Model):
     os_name = models.TextField()
     risk_lvl = models.CharField(max_length=20)
     nr_incidents = models.IntegerField()
+
+
+class SecurityRiskOrigin(models.Model):
+    risk_name = models.TextField()
+    nr_incidents = models.IntegerField()
