@@ -21,8 +21,11 @@ def risk_rating_chart(request):
 
     os_categories = list(set([k['os_name'] for k in dataset]))
     risk_incidents = [{k['risk_lvl']: k['nr_incidents']} for k in dataset]
+    # Create list of dicts with risk_incidents['risk_lvl'] as the new key
+    # and risk['nr_incidents'] as the value
     series_data = [{k: [d.get(k) for d in risk_incidents if d.get(k) is not None]} for k in
-                   set().union(*risk_incidents)]
+                   set().union(*risk_incidents)]  # return the keys from each dict
+    # Prepare data for Highcharts
     series_data = [{'name': r, 'data': n} for d in series_data for r, n in d.items()]
 
     chart = {
@@ -49,10 +52,14 @@ def risk_rating_chart(request):
 
 
 def risk_origin_chart(request):
+    # Acquire total number of incidents
+    # Used for calculating the percent value
     total_incidents = SecurityRiskOrigin.objects.aggregate(total_incidents=Sum('nr_incidents'))
     dataset = SecurityRiskOrigin.objects.values().all()
 
     risk_origin = [{k['risk_name']: k['nr_incidents']} for k in dataset]
+    # Calculate the percent value for y key and round it to 2 decimals
+    # Prepare data for Highcharts
     series_data = [{'name': rn, 'y': round((n / total_incidents['total_incidents']) * 100, 2)} for d in risk_origin
                    for rn, n in d.items()]
 
@@ -100,8 +107,11 @@ def browser_security_chart(request):
     dataset = SecurityBrowsers.objects.values().all()
 
     browser_dict = [{k['browser_name']: k['market_trust']} for k in dataset]
+    # Convert to list of lists for Highcharts
     browser_list = [[ln, lnr] for d in browser_dict for ln, lnr in d.items()]
-    sorted_list = sorted(browser_list, key=itemgetter(1), reverse=True)
+    # Sort in reverse order
+    # Prepare data for Highcharts
+    data_list = sorted(browser_list, key=itemgetter(1), reverse=True)
 
     chart = {
         'chart': {
@@ -143,7 +153,7 @@ def browser_security_chart(request):
             'type': 'pie',
             'name': 'Market trust',
             'innerSize': '50%',
-            'data': sorted_list
+            'data': data_list
         }]
     }
     dump = json.dumps(chart)
@@ -155,5 +165,5 @@ def vm_charts(request):
     chart_origin = risk_origin_chart(request)
     chart_secure = browser_security_chart(request)
 
-    return render(request, 'home.html',
+    return render(request, 'charts.html',
                   {'chart_risk': chart_risk, 'chart_origin': chart_origin, 'chart_secure': chart_secure})
